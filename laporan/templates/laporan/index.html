@@ -1,0 +1,40 @@
+{% extends "laporan/base.html" %}
+
+{% load static %}
+
+{% block title %} Selamat Datang!{% endblock %}
+
+	
+{% block content %}
+	
+    {% for laporan in semua_laporan %}
+	
+    <a href="{% url 'laporan:laporan_detail' laporan.id %}">
+	
+        <h2>{{ laporan.judul }} - {{ laporan.get_status_display }}</h2>
+  
+      </a>
+      <img src="{% static 'img/logo.png' %}" alt="My image" class="myimage">
+        <p>{{ laporan.deskripsi }}</p>
+	
+        <em>{{ laporan.pelapor}}</em> - <em>{{ laporan.jumlah_komentar}} Komentar</em> 
+	
+        <div class="komentar-{{ laporan.id }}" style="margin-left:30px">
+	
+            {% for komentar in laporan.komentar.all %}
+	
+                <h3>{{ forloop.counter }}. Komentar {{komentar.id}}</h3>
+	
+                <p>{{komentar.user}}</p>
+	
+                <p>{{ komentar.komentar }}</p>
+	
+            {% endfor %}
+	
+        </div>
+	
+        <hr>
+	
+    {% endfor %}
+	
+{% endblock %}

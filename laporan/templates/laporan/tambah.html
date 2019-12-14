@@ -1,0 +1,19 @@
+{% extends "laporan/base.html" %}
+	
+ 
+	
+{% block content %}
+	
+    <form action="{% url 'laporan:laporan_tambah'  %}" 
+	
+          method="post">
+	
+        {% csrf_token %}
+	
+        {{ form.as_table }}
+	
+        <input type="submit" value="Submit">
+	
+    </form>
+	
+{% endblock %}
